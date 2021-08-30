@@ -1,121 +1,93 @@
 ---
-title: What is a shell? 🐚 fuck
-date: 2020-01-25 11:58:47 +07:00
-modified: 2020-02-02 16:49:47 +07:00
-tags: [unix/linux, cli]
-description: Shell adalah sebuah command-line interpreter; program yang berperan sebagai penerjemah perintah yang diinputkan oleh User yang melalui terminal, sehingga perintah tersebut bisa dimengerti oleh si Kernel.
+title: 🔆Weather Api (html, php)
+date: 2021-08-30 19:16:03 +07:00
+modified: 2021-08-30 19:16:03 +07:00
+tags: [html, php]
+description: 네이버에서 날씨를 검색해 나오는 데이터 정보들을 쉽게(파싱) 사용할 수 있도록 간단하고 쉽게 제공해 주는 API를 만들어 보았습니다. "이 API는 JSON 포맷의 응답을 전송합니다."
 image: "/apa-itu-shell/shell_evolution.png"
 ---
 
-<a href="http://www.youtube.com/watch?v=tc4ROCJYbm0&t=70" target="_blank" rel="noopener">Dulu</a> Sebelum adanya <abbr title="Graphical User Interface">GUI</abbr> cara user berinteraksi dengan komputer menggunakan <abbr title="Command Line Interface">CLI</abbr> yaitu mengetik baris perintah pada sebuah antarmuka dalam bentuk baris teks seperti 👇.
+# 1. 개요
 
+PHP, HTML, CSS 언어 공부 (파싱)👇.
+
+## 1.1 API 목적
+
+네이버에서 날씨를 검색해 나오는 데이터 정보들을 쉽게(파싱) 사용할 수 있도록 간단하고 쉽게 제공해 주는 API를 만들어 보았습니다. "이 API는 JSON 포맷의 응답을 전송합니다."
+
+# 2. 환경 구축
+
+<span style="#03f3b3;color: red;">LAMP</span>
+<br>L: Linux (이번 wordpress는 CentOS 7에서 진행합니다.)
+<br>A: Apache 웹 서버
+<br>M: MySQL 또는 MariaDB
+<br>P: PHP
+<br>Centos7 & Apache/2.4.6 & 5.5.68-MariaDB & PHP 5.4.16
+
+<style>
+.zoom {
+  padding: 25px;
+  width: 600px;
+  height: 340px;
+}
+
+.zoom:hover {
+  transform: scale(2.5);
+  transition: .5s; /* 부드럽게 */
+}
+</style>
+
+# 3. 웹 서비스 시작
 <figure>
-<img src="/apa-itu-shell/terminal_nginx.gif" alt="installing nginx in ubuntu">
-<figcaption>Fig 1. Terminal emulator, instalasi package dan check service.</figcaption>
+<div style="border:1px dashed; padding:25px;" class="zoom"><img src="https://blog.kakaocdn.net/dn/V1g3h/btrduU2e4i9/hQ5NRi4lajIvCogJdDhQ11/img.gif" alt="Weather API Web Sites"></div>
+<figcaption>Fig 1. Check app service</figcaption>
 </figure>
 
-Jika kamu pernah menggunakan unix/linux mungkin pernah menggunakan program diatas, bahkan mungkin setiap hari menggunakannya untuk mengeksekusi suatu perintah melalui <a href="http://en.wikipedia.org/wiki/List_of_terminal_emulators" target="_blank" rel="noopener">terminal emulator</a>.
+GIF를 통해 홈페이지가 어떤식으로 이루어지고 API를 통해 JSON 포맷의 응답이 어떻게 오는지 확인할 수 있습니다. (다음은 사진으로 보여드리겠습니다.)
 
-User<sup id="user">[[1]](#user-ref)</sup> tidak bisa secara langsung berkomunikasi dengan sebuah hardware komputer, maka dari itu kita membutuhkan sebuah sistem operasi; **Kernel** adalah program yang merupakan inti utama dari sistem operasi komputer.
-
+<!-- <sup id="user">[[1]](#user-ref)</sup> -->
 <figure>
-<img src="/apa-itu-shell/kernel.png" alt="kernel central of operating system">
-<figcaption>Fig 2. bagan kernel.</figcaption>
+<div style="border:1px dashed; padding:25px;" class="zoom"><img src="/apa-itu-shell/main.png" alt="Weather API Web Sites - Main"></div>
+<figcaption>Fig 2. Main.</figcaption>
 </figure>
 
-Kernel memfasilitasi interaksi antara komponen perangkat keras dan perangkat lunak, berperan untuk menangani permintaan input/ouput dari perangkat lunak, selanjutnya menerjemahkannya ke dalam pemrosesan data untuk diintruksikan ke CPU, sehingga Hardware(cpu, memory, devices) mengerti perintah yang dimaksud dari pengguna.
-
-Ketika kita menginputkan suatu perintah pada terminal emulator, kernel tidak langsung mengerti perintah yang kita ketik, kita membutuhkan suatu interface sebagai perantara menuju kernel yaitu **Shell**.
 
 <figure>
-<img src="/apa-itu-shell/shell.png" alt="shell">
-<figcaption>Fig 3. bagan komunikasi shell.</figcaption>
+<div style="border:1px dashed; padding:25px;" class="zoom"><img src="/apa-itu-shell/json.png" alt="Weather API Web Sites - JSON"></div>
+<figcaption>Fig 3. Json</figcaption>
 </figure>
 
-<mark>Shell adalah sebuah command-line interpreter; program yang berperan sebagai penerjemah perintah yang diinputkan oleh User yang melalui terminal</mark>, sehingga perintah tersebut bisa dimengerti oleh si Kernel.
+<figure>
+<div style="border:1px dashed; padding:25px;" class="zoom"><img src="/apa-itu-shell/search.png" alt="Weather API Web Sites - JSON"></div>
+<figcaption>Fig 4. Search</figcaption>
+</figure>
 
-Login shell biasanya ditetapkan oleh local System Administrator ketika pada saat pertama user kamu dibuat, kamu bisa lihat login shell yang sedang kamu gunakan dengan perintah dibawah ini.
+<figure>
+<div style="border:1px dashed; padding:25px;"><img src="/apa-itu-shell/weather result.png" alt="Weather API Web Sites - Result"></div>
+<figcaption>Fig 5. Result</figcaption>
+</figure>
+
+<figure>
+<div style="border:1px dashed; padding:6px;"><img src="/apa-itu-shell/curl.png" alt="Weather API Web Sites - Curl"></div>
+<figcaption>Fig 6. Curl</figcaption>
+</figure>
+<!-- <mark>Shell adalah sebuah command-line interpreter; program yang berperan sebagai penerjemah perintah yang diinputkan oleh User yang melalui terminal</mark>, sehingga perintah tersebut bisa dimengerti oleh si Kernel. -->
 
 ```bash
-$ echo $SHELL
-# atau
-$ echo $0
+$ curl "http://192.168.35.237/weather/weather.php?query=지역"
+ -H "Content-Type: application/json; charset=UTF-8"
 ```
+curl<sup id="user">[[1]](#curl)</sup>을 통한 서버 동작 및 조회 결과 확인
 
-Setiap shell mempunyai default prompt. beberapa shell yang paling umum:
-
-```bash
-$ (dollar sign)   # sh, ksh, bash
-% (percent sign)  # csh, tcsh
-```
-
-##### Terminologi pada shell prompt
-
-Shell prompt adalah tempat dimana kita menuliskan suatu perintah, berikut adalah terminologinya ini membantu, jika kamu ingin mengetahui bagian-bagianya.
-
-<figure>
-<img src="/apa-itu-shell/term_shell_prompt.png" alt="shell">
-<figcaption>Fig 4. bagian-bagin dari shell prompt.</figcaption>
-</figure>
-
-Dibawah ini salah satu contoh perintah sederhana untuk menampilkan sebuah arsitektur CPU komputer yang sedang saya gunakan.
-
-<figure>
-<img src="/apa-itu-shell/terminal_lscpu.gif" alt="installing nginx in ubuntu">
-<figcaption>Fig 5. menampilkan informasi tentang arsitektur CPU.</figcaption>
-</figure>
-
-Dari perintah yang contohkan, ketika user mengetikan suatu inputan perintah di terminal dan menekan <kbd>ENTER</kbd>, maka shell akan mengubah perintah user menjadi bahasa yang bisa dipahami oleh kernel, dan Kernel menerjemahkannya ke dalam pemrosesan data untuk diintruksikan ke Hardware sehingga menghasilkan output yg sesuai dengan perintah user.
-
-Shell mempunyai beberapa macam dan turunan, berikut yang paling umum.
-
-<figure>
-<img src="/apa-itu-shell/shell_evolution.png" alt="shell evolution">
-<figcaption>Fig 6. evaluasi shell dari tahun ke tahun.</figcaption>
-</figure>
-
-Sedikit penjelasan dari gambar diatas.
-
-- Bourne shell `sh`
-  Dikembangkan oleh Stephen Bourne di Bell Labs, yang kala itu sebagai pengganti Thompson shell(diciptakan Ken Thompson), banyak sistem unix-like tetap memiliki `/bin/sh`—yang mana menjadi symbolic link atau hard link, bahkan ketika shell lain yang digunakan tetap `sh` adalah sebagai dasarnya, sebagai kompatibilitas perintah.
-- Korn shell `ksh` Unix shell yang dikembangkan oleh David Korn di Bell Labs,
-  inisialiasi pengembangan ini berdasar pada source code Bourne shell, namun juga memiliki fitur `csh` dan `sh`, pengembanganya pun pada saat saya menulis ini pun terus <a href="http://github.com/att/ast" target="_blank" rel="noopener">terawat</a>.
-- Bourne again shell `bash`
-  adalah proyek ini open source <a href="http://gnu.org/software/bash/" target="_blank" rel="noopener">GNU project</a> memilki kompatibel dengan `sh` yang menggabungkan fitur penting dari `ksh` dan `csh`, dan menjadi salah satu shell yang paling umum digunakan (umumnya menjadi default shell login Linux dan Apple's macOS Mojave).
-- Z shell `zsh` ini mempunyai wadah komunitasnya disebutnya <a href="http://ohmyz.sh/"  target="_blank" rel="noopener">"Oh My Zsh"</a>, plug-in dan theme `zsh` bisa kita temukan di komunitas ini, saya saat ini menggunakan `zsh`, shell ini juga menjadi default dari sistem operasi macOS Catalina, yang menggantikan bash.
-- friendly interactive shell `fish`
-  yah sesuai dengan <a href="http://fishshell.com/" target="_blank" rel="noopener">deskripsi</a> di web nya, menurut saya shell ini fun banget, fitur yang saya sukai dari shell ini autosuggestions, dan konfigurasi yang mudah melalui web based.
-
-Masih banyak yang belum dijelaskan pada tulisan ini jika masih tertarik, baca lebih <a href="http://en.wikipedia.org/wiki/List_of_command-line_interpreters#Operating_system_shells" target="_blank" rel="noopener">banyak</a> dan juga <a href="http://en.wikipedia.org/wiki/Comparison_of_command_shells" target="_blank" rel="noopener">komparasinya</a> masing-masing shell.
-
-Jika kamu tertarik untuk mengubah default shell login pada sistem operasi, kamu bisa menginstall dengan cara mengikuti didokumentasi/cara penginstallan dimasing-masing shell disini saya tidak membahas karena distro yang kita pakai mungkin berbeda-beda.
-
-Untuk menjadikan default shell login pada OS bisa menggunakan perintah ini.
-
-```bash
-# command
-$ sudo chsh [options] [LOGIN]
-
-# contoh penggunaan
-$ sudo chsh -s /user/bin/zsh harpi
-# mengubah default shell user harpi menjadi zsh shell.
-$ reboot
-
-# atau kamu juga bisa mengubah file /etc/passwd dan edit secara manual user shellnya.
-# jika masih bingung manfaatkan perintah man untuk melihat manual page.
-$ man chsh
-```
-
-Terakhir untuk tulisan ini, shell memilki berbagai macam, pilihlah shell yang sesuai dengan keinginanmu untuk menunjang produktivitas dan sesuaikan dengan kebutuhan, terlalu banyak plugin dan kebingungan memilih tema itu buruk 😁.
-
-Terimakasih sudah baca, _penulis menerima kritik dan saran._
+# 4. 프로젝트 결과
+1. html, css 적용 방법 및 코드를 더 쉽게 짜는법을 배웠고, 
+2. php를 통해 api를 만들어 json으로 쉽게 포맷 응답을 하는법도 알 수 있어서 나중에 날씨 api를 써서 간편하게 조회 할 수 있을것 같습니다.
+3. 파이썬, 자바스크립트, 자바로 파싱을 하다가 php로 해보니 php는 좀 노가다라는걸 알았습니다. (그래도 php 공부되서 좋았다😅)
 
 ##### Notes
 
-<small id="user-ref"><sup>[[1]](#user)</sup> Manusia yang mengoperasikan dan mengendalikan sistem komputer.</small>
+<small id="curl"><sup>[[1]](#user)</sup> curl은 오픈 소스로 개발되어 윈도우와 리눅스에 기본 설치되고 있는 웹 개발 툴로써 http, https, ftp, sftps, smtp, telnet 등의 다양한 프로토콜과 Proxy, Header, Cookie 등의 세부 옵션까지 쉽게 설정할 수 있습니다.<br>이러한 장점 때문에 Client를 코딩을 시작하기 전에 curl 명령어로 서버 동작을 먼저 확인함으로써 좀 더 빠르게 개발을 진행할 수 있습니다.</small>
 
-##### Resources
-
-- [Evolution shells in Linux](http://developer.ibm.com/tutorials/l-linux-shells/)
-- [Kernel Defintion](http://www.linfo.org/kernel.html)
-- [The Shell](http://www.cis.rit.edu/class/simg211/unixintro/Shell.html)
+# 5. 참고자료
+- https://html5up.net/read-only
+- 코드 : https://github.com/Veloideu/Weather-API-html-css-php- (제 깃헙에 올려두었습니다.)
