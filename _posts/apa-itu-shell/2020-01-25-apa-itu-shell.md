@@ -4,7 +4,7 @@ date: 2021-08-30 19:16:03 +07:00
 modified: 2021-08-30 19:16:03 +07:00
 tags: [html, php]
 description: 네이버에서 날씨를 검색해 나오는 데이터 정보들을 쉽게(파싱) 사용할 수 있도록 간단하고 쉽게 제공해 주는 API를 만들어 보았습니다. "이 API는 JSON 포맷의 응답을 전송합니다."
-image: "/apa-itu-shell/shell_evolution.png"
+image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcVNmm8%2FbtrdEjeFK6C%2FSb271UmoPaBwntvxpKDAOK%2Fimg.png"
 ---
 
 # 1. 개요
@@ -32,7 +32,7 @@ PHP, HTML, CSS 언어 공부 (파싱)👇.
 }
 
 .zoom:hover {
-  transform: scale(2.5);
+  transform: scale(1.75);
   transition: .5s; /* 부드럽게 */
 }
 </style>
