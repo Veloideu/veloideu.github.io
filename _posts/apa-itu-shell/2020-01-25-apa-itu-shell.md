@@ -47,28 +47,28 @@ GIF를 통해 홈페이지가 어떤식으로 이루어지고 API를 통해 JSON
 
 <!-- <sup id="user">[[1]](#user-ref)</sup> -->
 <figure>
-<div style="border:1px dashed; padding:25px;" class="zoom"><img src="/apa-itu-shell/main.png" alt="Weather API Web Sites - Main"></div>
+<div style="border:1px dashed; padding:25px;" class="zoom"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcVNmm8%2FbtrdEjeFK6C%2FSb271UmoPaBwntvxpKDAOK%2Fimg.png" alt="Weather API Web Sites - Main"></div>
 <figcaption>Fig 2. Main.</figcaption>
 </figure>
 
 
 <figure>
-<div style="border:1px dashed; padding:25px;" class="zoom"><img src="/apa-itu-shell/json.png" alt="Weather API Web Sites - JSON"></div>
+<div style="border:1px dashed; padding:25px;" class="zoom"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FefWqFt%2Fbtrdz7lRQUy%2FBSMGs7m6dIZIbrRgX0fAKk%2Fimg.png" alt="Weather API Web Sites - JSON"></div>
 <figcaption>Fig 3. Json</figcaption>
 </figure>
 
 <figure>
-<div style="border:1px dashed; padding:25px;" class="zoom"><img src="/apa-itu-shell/search.png" alt="Weather API Web Sites - JSON"></div>
+<div style="border:1px dashed; padding:25px;" class="zoom"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FTzIRT%2Fbtrdsw035ez%2FsfRKLJRtfmiLBue4rFo4Gk%2Fimg.png" alt="Weather API Web Sites - JSON"></div>
 <figcaption>Fig 4. Search</figcaption>
 </figure>
 
 <figure>
-<div style="border:1px dashed; padding:25px;"><img src="/apa-itu-shell/weather result.png" alt="Weather API Web Sites - Result"></div>
+<div style="border:1px dashed; padding:25px;"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdMNroT%2Fbtrdylyg1XN%2FXG2P5XyF0iw7lSM6k4ZLC1%2Fimg.png" alt="Weather API Web Sites - Result"></div>
 <figcaption>Fig 5. Result</figcaption>
 </figure>
 
 <figure>
-<div style="border:1px dashed; padding:6px;"><img src="/apa-itu-shell/curl.png" alt="Weather API Web Sites - Curl"></div>
+<div style="border:1px dashed; padding:6px;"><img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FboeojY%2FbtrdES82Dwy%2FqY8xZSKRAFAgSyTGLEcWBK%2Fimg.png" alt="Weather API Web Sites - Curl"></div>
 <figcaption>Fig 6. Curl</figcaption>
 </figure>
 <!-- <mark>Shell adalah sebuah command-line interpreter; program yang berperan sebagai penerjemah perintah yang diinputkan oleh User yang melalui terminal</mark>, sehingga perintah tersebut bisa dimengerti oleh si Kernel. -->
