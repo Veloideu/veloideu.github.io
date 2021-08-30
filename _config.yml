@@ -14,8 +14,8 @@ author:
   facebook: veloideu
   email: veloideu@email.com
   avatar: /assets/img/avatar.jpg
-url: 'https://klise.now.sh'
-baseurl: null
+url: 'https://veloideu.github.io/'
+baseurl: 'null'
 permalink: '/:title/'
 google_analytics: null
 fb_appid: null
