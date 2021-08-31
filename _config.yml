@@ -1,9 +1,9 @@
 title: "\U0001D449\U0001D452\U0001D459\U0001D45C\U0001D456\U0001D451\U0001D452\U0001D462 \U0001D44A\U0001D452\U0001D44F \U0001D460\U0001D456\U0001D461\U0001D452\U0001D460"
 description: ''
-lang: en-US
-timezone: Asia/Jakarta
+lang: ko
+timezone: Asia/Seoul
 image: assets/img/ogp.png
-repo: 'https://github.com/veloideu'
+repo: 'https://github.com/piharpi/jekyll-klise'
 mode: light
 author:
   name: "\U0001D463\U0001D452\U0001D459\U0001D45C\U0001D456\U0001D451\U0001D452\U0001D462"
@@ -14,8 +14,8 @@ author:
   facebook: veloideu
   email: veloideu@email.com
   avatar: /assets/img/avatar.jpg
-url: 'https://veloideu.github.io/'
-baseurl: 'null'
+url: 'https://github.com/veloideu'
+baseurl: ''
 permalink: '/:title/'
 google_analytics: null
 fb_appid: null
