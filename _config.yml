@@ -3,7 +3,7 @@ description: ''
 lang: ko
 timezone: Asia/Seoul
 image: assets/img/ogp.png
-repo: 'https://github.com/piharpi/jekyll-klise'
+repo: 'https://github.com/Veloideu/veloideu.github.io'
 mode: light
 author:
   name: "\U0001D463\U0001D452\U0001D459\U0001D45C\U0001D456\U0001D451\U0001D452\U0001D462"
@@ -14,7 +14,7 @@ author:
   facebook: veloideu
   email: veloideu@email.com
   avatar: /assets/img/avatar.jpg
-url: 'https://github.com/veloideu'
+url: 'https://veloideu.kr'
 baseurl: ''
 permalink: '/:title/'
 google_analytics: null
