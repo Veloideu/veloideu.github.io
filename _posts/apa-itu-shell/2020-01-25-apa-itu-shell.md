@@ -24,19 +24,6 @@ PHP, HTML, CSS 언어 공부 (파싱)👇.
 <br>P: PHP
 <br>Centos7 & Apache/2.4.6 & 5.5.68-MariaDB & PHP 5.4.16
 
-<style>
-.zoom {
-  padding: 25px;
-  width: 600px;
-  height: 340px;
-}
-
-.zoom:hover {
-  transform: scale(1.75);
-  transition: .5s; /* 부드럽게 */
-}
-</style>
-
 # 3. 웹 서비스 시작
 <figure>
 <div style="border:1px dashed; padding:25px;" class="zoom"><img src="https://blog.kakaocdn.net/dn/V1g3h/btrduU2e4i9/hQ5NRi4lajIvCogJdDhQ11/img.gif" alt="Weather API Web Sites"></div>

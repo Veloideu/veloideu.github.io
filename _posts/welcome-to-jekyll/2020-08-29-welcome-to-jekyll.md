@@ -9,14 +9,14 @@ image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2
 ---
 # 1. 개요
 
-LAMP를 기반으로 웹 모의해킹 진단을 위하여 가상의 커뮤니티 사이트 구축 하여, 모의 침투 테스트를 통해 취약점를 진단합니다.
+LAMP를 기반으로 웹 모의해킹 진단을 위하여 가상의 커뮤니티 사이트 구축 하여, 모의 침투 테스트를 통해 `취약점`를 진단합니다.
 
 <!-- CIA Web Sites는 php, mariadb의 취약점을 고려해야 할 측면에 대해 설명합니다. -->
 
 ## 1.1 사이트 목적
 
-웹 사이트를 직접 개발하여 취약한 코드를 더 자세히 알 수 있으며,
-<br>웹 개발에 취약점이 어디서 어떤 방식으로 취약점이 발생하는지 세밀하게 관찰하며, 관찰한 내용을 토대로 점검할 수 있습니다.
+웹 사이트를 직접 `개발`하여 `취약한 코드`를 더 자세히 알 수 있으며,
+<br>웹 개발에 취약점이 어디서 어떤 방식으로 취약점이 발생하는지 세밀하게 관찰하며, 관찰한 내용을 토대로 `점검`할 수 있습니다.
 
 
 # 2. 환경 구축
@@ -27,30 +27,39 @@ LAMP를 기반으로 웹 모의해킹 진단을 위하여 가상의 커뮤니티
 <br>M: MySQL 또는 MariaDB
 <br>P: PHP
 
-
-<style>
-.zoom {
-  padding: 25px;
-  width: 600px;
-  height: 340px;
-}
-
-.zoom:hover {
-  transform: scale(1.75);
-  transition: .5s; /* 부드럽게 */
-}
-</style>
-
 # 3. 웹 서비스 시작
 <figure>
-<div style="border:1px dashed; padding:25px;" class="zoom"><img src="https://blog.kakaocdn.net/dn/zQSSl/btrdDLDbTUF/ATgAF375H6kwcUo6uLVCx1/img.gif" alt="Weather API Web Sites"></div>
+<img src="https://blog.kakaocdn.net/dn/bkruN7/btrdIT9gJ6b/xykMYzf4btPjli943XAaJ1/img.gif" alt="Weather API Web Sites"></div>
 <figcaption>Fig 1. Check app service</figcaption>
 </figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fo67bb%2FbtrdK6fJvEZ%2FXx8OuQBTKafvh2biifknxk%2Fimg.png" alt="Weather API Web Sites - Main"></div>
+<figcaption>Fig 2. Main.</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FckMpKL%2FbtrdKWqymEv%2F1zhejUXiCkITnzd3PgKm5k%2Fimg.png" alt="Weather API Web Sites - Main"></div>
+<figcaption>Fig 3. Login.</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F0FIsA%2FbtrdHf59G0q%2FlpOiKb00MDe26eAchra7Kk%2Fimg.png" alt="Weather API Web Sites - Main"></div>
+<figcaption>Fig 4. Register.</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FGi58T%2FbtrdOM1J3fH%2FkZ1ltqKFCVkKFFK8kx1a41%2Fimg.png" alt="Weather API Web Sites - Main"></div>
+<figcaption>Fig 5. MyPage.</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbAbeJB%2FbtrdHfSxI9c%2FXlgsK5dP2CB8FRy5DzPea1%2Fimg.png" alt="Weather API Web Sites - Main"></div>
+<figcaption>Fig 6. Board.</figcaption>
+<figure>
+<img src="/apa-itu-shell/terminal_nginx.gif" alt="installing nginx in ubuntu">
+<figcaption>Fig 1. Terminal emulator, instalasi package dan check service.</figcaption>
+</figure>
 
+</figure>
 ## 3-1 취약점 분석
 <figure>
-<div style="border:1px dashed; padding:25px;" class="zoom"><img src="https://blog.kakaocdn.net/dn/zQSSl/btrdDLDbTUF/ATgAF375H6kwcUo6uLVCx1/img.gif" alt="Weather API Web Sites"></div>
-<figcaption>Fig 1. Check app service</figcaption>
+
 </figure>
 
 # 4. 프로젝트 결과
