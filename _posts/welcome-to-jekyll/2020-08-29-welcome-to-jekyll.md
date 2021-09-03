@@ -7,9 +7,22 @@ tags: [ php, mariadb, xss, csrf, webshell]
 description: 네이버에서 날씨를 검색해 나오는 데이터 정보들을 쉽게(파싱) 사용할 수 있도록 간단하고 쉽게 제공해 주는 API를 만들어 보았습니다. "이 API는 JSON 포맷의 응답을 전송합니다."
 image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcVNmm8%2FbtrdEjeFK6C%2FSb271UmoPaBwntvxpKDAOK%2Fimg.png"
 ---
-# 1. 개요
+# 0. 목차
+1. 개요<br>1.1 사이트 목적
+2. 환경 구축
+3. 웹 서비스 시작
+4. 취약점 점검
+<br>4.1 Blind SQL Injection
+<br>4.2 XSS
+<br>4.3 CSRF
+<br>4.4 Web Shell
+5. 프로젝트 결과
+6. 참고자료
 
-LAMP를 기반으로 웹 모의해킹 진단을 위하여 가상의 커뮤니티 사이트 `구축` 하여, 모의 침투 테스트를 통해 `취약점`를 진단합니다.
+# 1. 개요
+<mark>CIA 프로젝트</mark>
+<br>프로젝트의 이름인 CIA는  보안의 3요소 (`기밀성, 무결성, 가용성`) 에서 가져왔다.  
+CIA 프로젝트는 LAMP를 기반으로 웹 모의해킹 진단을 위하여 가상의 커뮤니티 사이트 `구축` 하여, 모의 침투 테스트를 통해 `취약점`를 진단합니다.
 
 <!-- CIA Web Sites는 php, mariadb의 취약점을 고려해야 할 측면에 대해 설명합니다. -->
 <hr>
@@ -59,11 +72,11 @@ LAMP를 기반으로 웹 모의해킹 진단을 위하여 가상의 커뮤니티
 
 <hr>
 
-## 3-1 취약점 분석
+## 4. 취약점 점검
 
-##### <sup id="sql">[[1]](#user-ref)</sup><kbd>Blind SQL Injection</kbd>
-1. 쿼리의 결과를 참과 거짓으로만 출력하는 페이지에서 사용하는 공격이다.
-2. 출력 내용이 참 / 거짓 밖에 없어서 그것을 이용하여 데이터베이스의 내용을 추측하여 쿼리를 조작한다.
+## 4-1 <sup id="sql">[[1]](#user-ref)</sup>Blind SQL Injection
+1. 쿼리의 결과를 `참과 거짓`으로만 출력하는 페이지에서 사용하는 공격이다.
+2. 출력 내용이 참 / 거짓 밖에 없어서 그것을 이용하여 데이터베이스의 내용을 추측하여 `쿼리를 조작`한다.
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fx1H93%2FbtqG9ST9EIX%2FX85GJhTbLbt2mkNoXKDm90%2Fimg.png
@@ -241,10 +254,10 @@ print(Member_name)
 
 저는 시간을 단축하기 위해 위의 7~9번 사진처럼 공격 스크립트 `파이썬`을 이용하여 작성 후 공격하여 `원하는 결과값`을 얻을 수 있엇습니다.
 
- 
-##### <sup id="xss">[[3]](#user-ref3)</sup> `XSS` `: Cross Site Scripting`
+ <hr>
+## 4-2 <sup id="xss">[[3]](#user-ref3)</sup> `XSS` `: Cross Site Scripting`
 
- 1. 사이트를 교차해서 스크립트를 발생시킴.
+ 1. 사이트를 `교차`해서 스크립트를 발생시킴.
  2. 게시판을 포함한 웹에서 `자바스크립트`같은 스크립트 언어를 삽입해 개발자가 의도하지 않은 기능을 작동시키는것.
  3. `클라이언트측`을 대상으로 한 공격
 
@@ -324,11 +337,12 @@ XSS 공격이 가능한것이 확인이 되어, 전 XSS 공격으로 `쿠키값`
 
 게시글을 읽는 사람은 `해커`의 웹 서버에 `cookie.php`를 읽고 `쿠키값이 탈취` 되며, 사진 창이 띄어지도록 하였고, `fopen`을 통하여 해커 `data.txt`에 시간, 쿠키값을 `저장`하도록 하였습니다.
 <br>
-##### <sup id="csrf">[[4]](#user-ref4)</sup> `CSRF` `: Cross Site Request Forgery`
+<hr>
+## 4-3 <sup id="csrf">[[4]](#user-ref4)</sup> `CSRF` `: Cross Site Request Forgery`
 
-1. XSS와 동일한 원리로 게시판, 이메일 등 컨텐츠에 악성 스크립트 또는 HTML 태그 삽입
-2. 사용자 측 브라우저에서 삽입된 스크립트 또는 HTML 태그가 실행됨
-3. 공격자가 의도한 행위(CRUD)가 있는 위조된 HTTP 요청이 강제로 수행됨
+1. XSS와 `동일한 원리`로 게시판, 이메일 등 컨텐츠에 `악성 스크립트` 또는 HTML 태그 삽입
+2. 사용자 측 브라우저에서 `삽입된 스크립트` 또는 HTML 태그가 실행됨
+3. 공격자가 의도한 행위(CRUD)가 있는 위조된 HTTP 요청이 `강제로 수행`됨
 
 이번에도 `게시판`을 통해 `CSRF` 공격이 가능한지 확인해보겠습니다.
 
@@ -393,16 +407,21 @@ XSS 공격이 가능한것이 확인이 되어, 전 XSS 공격으로 `쿠키값`
 
 정상적인 게시글을 작성 후 <sup id="fiddler">[[5]](#user-ref5)</sup>`fiddler`로 글쓰기가 어떠한 방식으로 작성이 되었는지 <br><sup id="sniffing">[[6]](#user-ref6)</sup>`스니핑` 한 후 탈취한 `파라미터와 변수`를 위에 CSRF 공격 코드처럼 양식을 맞추어 작성 후 게시글을 등록합니다. 그다음 다른 계정으로 작성한 게시글(CSRF를 코드가 주입된 게시글)를 읽으면 사이트 간 `요청 위조`를 하였기 때문에 내가 작성한 글이 아님에도 해커에 의해서 `의도치 않은` 글을 작성하게 됩니다. (* input type="file"은 hidden이 안먹히므로 style에 따로 display:none;를 이용하여 스타일링 해주었습니다.)
 
+<hr>
+## 4-4 <sup id="webshell">[[7]](#user-ref7)</sup> `Web Shell`
 
+1. XSS와 `동일한 원리`로 게시판, 이메일 등 컨텐츠에 `악성 스크립트` 또는 HTML 태그 삽입
+2. 사용자 측 브라우저에서 `삽입된 스크립트` 또는 HTML 태그가 실행됨
+3. 공격자가 의도한 행위(CRUD)가 있는 위조된 HTTP 요청이 `강제로 수행`됨
+
+이번에도 `게시판`을 통해 `CSRF` 공격이 가능한지 확인해보겠습니다.
 
 
 <hr>
 
-# 4. 프로젝트 결과
+# 5. 프로젝트 결과
 
-<hr>
 
-# 5. 대응방안
 
 <hr>
 
