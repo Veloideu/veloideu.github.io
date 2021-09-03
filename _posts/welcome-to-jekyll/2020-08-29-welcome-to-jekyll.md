@@ -16,6 +16,7 @@ image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2
 <br>4.2 XSS
 <br>4.3 CSRF
 <br>4.4 Web Shell
+<br>4.5 Directory Listing
 5. 프로젝트 결과
 6. 참고자료
 
@@ -261,7 +262,7 @@ print(Member_name)
  2. 게시판을 포함한 웹에서 `자바스크립트`같은 스크립트 언어를 삽입해 개발자가 의도하지 않은 기능을 작동시키는것.
  3. `클라이언트측`을 대상으로 한 공격
 
-이번에도 `게시판`을 통해 `XSS` 공격이 가능한지 확인해보겠습니다.
+전 여기서 `Stored XSS` (웹 사이트 `게시판`에 스크립트를 `삽입`하는 공격 방식)를 이용해보도록 하겠습니다.
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb3uWBk%2FbtrdT1MevqC%2FAy2bksolFQoHa6cPfYcnkK%2Fimg.png
@@ -410,11 +411,68 @@ XSS 공격이 가능한것이 확인이 되어, 전 XSS 공격으로 `쿠키값`
 <hr>
 ## 4-4 <sup id="webshell">[[7]](#user-ref7)</sup> `Web Shell`
 
-1. XSS와 `동일한 원리`로 게시판, 이메일 등 컨텐츠에 `악성 스크립트` 또는 HTML 태그 삽입
-2. 사용자 측 브라우저에서 `삽입된 스크립트` 또는 HTML 태그가 실행됨
-3. 공격자가 의도한 행위(CRUD)가 있는 위조된 HTTP 요청이 `강제로 수행`됨
+1. 웹쉘은 말 그대로 웹사이트를 통해 쉘(shell)을 여는 공격 입니다.
+2. 원격에서 웹서버에 명령을 수행할 수 있도록 작성한 웹 스크립트 (ASP, JSP, PHP, CGI 파일 등) 형태를 가짐
+3. 웹 서버의 다양한 취약점 (서버 취약점, 웹 어플리케이션 취약점) 등을 타깃으로 공격하여 웹 서버에 웹쉘을 업로드한 후<br>일반적인 웹 브라우저 (80 Port)를 통하여 업로드한 웹쉘을 실행하여 침투한 서버상의 정보 유출 및 변조, 악성코드 유포 등의 불법 행위를 행하는 형태가 많음
 
-이번에도 `게시판`을 통해 `CSRF` 공격이 가능한지 확인해보겠습니다.
+이번에도 `게시판`을 통해 `Web Shell` 공격이 가능한지 확인해보겠습니다.
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWJyh1%2Fbtrd22XMdp5%2FWy6ByH8wcJu8usZFOuTv51%2Fimg.png
+" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdmXSiq%2Fbtrd1zvgbKa%2Fu7s5Y4W1tBbNHSgTGwW3MK%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbyiLcF%2FbtrdZWdTA6i%2F3yOPDs2Uh73O2gMcDniAjK%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F27sNp%2Fbtrd14IxI5t%2FAL9Wkve4Pp1Cwoez5Qvpjk%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdQKS8%2FbtrdZVst5GP%2FkTMGb8EDpXYPOXKScnpgNk%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FclHe3H%2Fbtrd1xRKaoj%2FekxHDOk9M0FipXv9bA1KVK%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FZquWV%2Fbtrd2yQaBaP%2FaXvtPCtTfJNvuwMnzqgv01%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzwmyJ%2Fbtrd0jzVjP6%2F9yEUEVUT3c1cS5giEhUqzk%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcmb0J4%2Fbtrd0ywQElW%2FAl7yg7nDOOB7eushxfECXK%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcDhOXg%2Fbtrd0jmmgyR%2Fa5C9dRTM6S0y0KJmHUqeFK%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+</figure>
+
+
+<hr>
+## 4-5 `Directory Listing`
+
+1. 디렉토리 리스팅이란 웹서버를 `디렉토리`로 `접속`할 때, 해당 디렉토리내의 `파일과 디렉토리`를 `리스트`로 보여주는 기능을 말합니다.
 
 
 <hr>
@@ -448,6 +506,12 @@ limit 함수는 문자열의 길이를 반환한다. 문장열의 길이를 알�
 <br>
 <small id="user-ref6"><sup>[[6]](#sniffing)</sup> Sniffing의 사전적 의미는 코를 킁킁거리다, 냄새를 맡다 등의 뜻이 존재한다.<br>
 자신이 아닌상대방들의 패킷이 통신망에 돌아다니는 데이터를 몰래 도청하는 행위이다.  정보자산의 기밀성을 저해한다.</small>
+<br>
+<br>
+<small id="user-ref7"><sup>[[7]](#webshell)</sup>※쉘(shell) : 사용자에게 받은 지시를 해석하여 하드웨어 지시어로 바꿈으로써 운영체제의 커널과 사용자 사이를 이어주는 것</small>
+<br>
+<br>
+<small id="user-ref8"><sup>[[8]](#Directory Listing)</sup> Sㅁ</small>
 <hr>
 
 # 6. 참고자료
