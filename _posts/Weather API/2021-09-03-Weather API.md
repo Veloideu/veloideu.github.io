@@ -1,5 +1,5 @@
 ---
-title: 🔆 Weather Api (html, php)
+title: 🔆 Naver Weather Api
 date: 2021-08-30 19:16:03 +07:00
 # modified: 2021-08-30 19:16:03 +07:00
 tags: [html, php, linux]
