@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "⚠모의해킹 사이트 구축 & 웹 침투 테스트"
+title:  " 🔐 모의해킹 사이트 구축 & 웹 침투 테스트"
 date:   2021-09-04 15:54:50 +0700
 categories: "모의해킹"
 tags: [ PHP, Mariadb, XSS, CSRF, Web Shell. Directory Listing, Blind SQL Injection]
